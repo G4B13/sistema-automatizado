@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Lembretes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Lembretes</h1>
+        <form id="reminderForm">
+            <input type="text" id="reminderInput" placeholder="Digite seu lembrete..." required>
+            <input type="datetime-local" id="reminderTime" required>
+            <button type="submit">Adicionar Lembrete</button>
+        </form>
+
+        <ul id="reminderList"></ul>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

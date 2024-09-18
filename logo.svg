@@ -1,0 +1,12 @@
+<imagem>
+  <fundo>cinza</fundo>
+  <elemento>
+    <forma>círculo</forma>
+    <cor>azul</cor>
+    <conteudo>
+      <mão>direita</mão>
+      <mão>esquerda</mão>
+    </conteudo>
+  </elemento>
+  <texto>GOWESH TESH</texto>
+</imagem>
