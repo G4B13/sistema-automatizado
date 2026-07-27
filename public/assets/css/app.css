@@ -1,0 +1,162 @@
+/* Sistema LUA
+   Interface pensada para totem com touchscreen e para pessoas
+   neurodiversas: alvos de toque grandes, contraste alto, pouca
+   informação por vez e nenhum movimento desnecessário.            */
+
+:root {
+  --bg: #f7f9fc;
+  --surface: #ffffff;
+  --border: #d9e0ec;
+  --border-forte: #b6c2d6;
+  --text: #16202f;
+  --muted: #5a6b82;
+  --primaria: #4338ca;
+  --primaria-hi: #4f46e5;
+  --sucesso: #067647;
+  --perigo: #b42318;
+  --raio: 14px;
+  /* Alvo mínimo de toque recomendado pela WCAG. */
+  --toque: 48px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 17px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+h1 { font-size: 1.7rem; margin: 0 0 6px; }
+h2 { font-size: 1.15rem; margin: 0 0 2px; }
+p { margin: 0; }
+a { color: var(--primaria); }
+
+.wrap { width: 100%; max-width: 880px; margin-inline: auto; padding-inline: 20px; }
+
+/* Topo */
+.topo { background: var(--surface); border-bottom: 1px solid var(--border); }
+.topo-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 68px; }
+.marca { display: flex; align-items: center; gap: 10px; font-weight: 700; color: var(--text); text-decoration: none; }
+.usuario { display: flex; align-items: center; gap: 14px; }
+.usuario-nome { color: var(--muted); font-size: .95rem; }
+
+.conteudo { padding-block: 28px 64px; }
+
+.cabecalho-pagina {
+  display: flex; flex-wrap: wrap; gap: 16px;
+  align-items: center; justify-content: space-between; margin-bottom: 22px;
+}
+
+.apoio { color: var(--muted); font-size: .95rem; }
+
+/* Cartões */
+.cartao { background: var(--surface); border: 1px solid var(--border); border-radius: var(--raio); padding: 30px; }
+.cartao--estreito { max-width: 430px; margin: 40px auto; text-align: center; }
+.cartao--estreito .formulario { text-align: left; }
+.logo-entrada { display: block; margin: 0 auto 14px; }
+.rodape-cartao { margin-top: 20px; }
+
+/* Botões: altura mínima de toque em todos. */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+  min-height: var(--toque); padding: 12px 22px;
+  border: 2px solid transparent; border-radius: 10px;
+  font: inherit; font-weight: 600; text-decoration: none; cursor: pointer;
+  transition: background .15s, border-color .15s, color .15s;
+}
+.btn--primario { background: var(--primaria); color: #fff; }
+.btn--primario:hover { background: var(--primaria-hi); }
+.btn--sutil { border-color: var(--border-forte); background: var(--surface); color: var(--text); }
+.btn--sutil:hover { border-color: var(--muted); }
+.btn--grande { min-height: 56px; font-size: 1.05rem; padding-inline: 26px; }
+.btn--bloco { width: 100%; }
+
+.acoes { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; }
+
+/* Botão só de ícone, também no tamanho de toque */
+.btn-icone {
+  display: grid; place-items: center;
+  width: var(--toque); height: var(--toque);
+  border: 2px solid var(--border); border-radius: 10px;
+  background: var(--surface); color: var(--muted); cursor: pointer;
+  transition: border-color .15s, color .15s, background .15s;
+}
+.btn-icone:hover { border-color: var(--border-forte); color: var(--text); }
+.btn-icone--feito { background: var(--sucesso); border-color: var(--sucesso); color: #fff; }
+.btn-icone--perigo:hover { border-color: var(--perigo); color: var(--perigo); }
+
+/* Filtros */
+.filtros { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+.filtro {
+  min-height: 44px; display: inline-flex; align-items: center; padding: 0 18px;
+  border: 2px solid var(--border); border-radius: 999px;
+  background: var(--surface); color: var(--muted); text-decoration: none; font-weight: 600; font-size: .95rem;
+}
+.filtro--ativo { border-color: var(--primaria); color: var(--primaria); }
+
+/* Lista de lembretes */
+.lista-lembretes { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.lembrete {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-left: 5px solid var(--primaria); border-radius: var(--raio); padding: 18px 20px;
+}
+.lembrete--feito { border-left-color: var(--sucesso); opacity: .62; }
+.lembrete--feito h2 { text-decoration: line-through; }
+.lembrete-icone { display: grid; place-items: center; width: 46px; height: 46px; flex-shrink: 0; color: var(--primaria); }
+.lembrete--feito .lembrete-icone { color: var(--sucesso); }
+.lembrete-texto { flex-grow: 1; min-width: 0; }
+.lembrete-quando { font-size: .9rem; color: var(--muted); margin-top: 4px; }
+.esta-atrasado { color: var(--perigo); font-weight: 600; }
+.lembrete-acoes { display: flex; gap: 8px; flex-shrink: 0; }
+.lembrete-acoes form { display: contents; }
+
+/* Formulários */
+.formulario { display: grid; gap: 18px; margin-top: 22px; }
+.campo { border: 0; padding: 0; margin: 0; }
+.campo label, .campo legend { display: block; font-weight: 600; margin-bottom: 7px; font-size: .97rem; }
+.campo input[type="text"], .campo input[type="email"], .campo input[type="password"],
+.campo input[type="datetime-local"], .campo textarea {
+  width: 100%; min-height: var(--toque); padding: 12px 14px;
+  border: 2px solid var(--border); border-radius: 10px;
+  font: inherit; background: var(--surface); color: var(--text);
+}
+.campo textarea { resize: vertical; }
+.campo input:focus, .campo textarea:focus { outline: 3px solid var(--primaria); outline-offset: 1px; border-color: var(--primaria); }
+.campo .erro { display: block; margin-top: 6px; color: var(--perigo); font-size: .88rem; font-weight: 600; }
+.campo .apoio { display: block; margin-top: 6px; font-size: .88rem; }
+
+/* Escolha de ícone: cartões grandes, não um select */
+.grade-icones { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(110px, 100%), 1fr)); gap: 10px; }
+.opcao-icone input { position: absolute; opacity: 0; width: 0; height: 0; }
+.opcao-icone-visual {
+  display: grid; place-items: center; gap: 7px; padding: 16px 8px;
+  border: 2px solid var(--border); border-radius: 12px; cursor: pointer;
+  color: var(--muted); font-size: .85rem; font-weight: 600; text-align: center;
+  transition: border-color .15s, color .15s, background .15s;
+}
+.opcao-icone-visual:hover { border-color: var(--border-forte); }
+.opcao-icone input:checked + .opcao-icone-visual { border-color: var(--primaria); color: var(--primaria); background: #eef2ff; }
+.opcao-icone input:focus-visible + .opcao-icone-visual { outline: 3px solid var(--primaria); outline-offset: 2px; }
+
+/* Avisos */
+.aviso { padding: 14px 18px; border-radius: 10px; font-weight: 600; margin-bottom: 20px; }
+.aviso--sucesso { background: #ecfdf3; border: 2px solid #abefc6; color: var(--sucesso); }
+.aviso--erro { background: #fef3f2; border: 2px solid #fecdca; color: var(--perigo); }
+
+.vazio { background: var(--surface); border: 2px dashed var(--border); border-radius: var(--raio); padding: 48px 24px; text-align: center; }
+.vazio p { color: var(--muted); margin-bottom: 20px; }
+
+.rodape { border-top: 1px solid var(--border); padding-block: 20px; color: var(--muted); font-size: .88rem; }
+
+@media (max-width: 560px) {
+  .lembrete { flex-wrap: wrap; }
+  .lembrete-acoes { width: 100%; justify-content: flex-end; }
+}
+
+/* Nenhuma animação: movimento inesperado atrapalha parte do público. */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
